@@ -31,20 +31,3 @@ app.listen(port, () => {
         console.log(`Servidor http escuchando en el puerto ${port}`);
     }
 })
-
-
-
-
-
-
-
-
-
-
-app.get('/', (req, res) => {
-    res.send()
-})
-function newFunction() {
-    return require('express');
-}
-
