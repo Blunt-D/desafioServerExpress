@@ -20,9 +20,9 @@ app.get('/productos', (req, res) => {
 })
 
 app.get('/productoRandom', (req, res) => {
-    const allProducts =  this.read()
-    const x = Math.floor(Math.random() * (4 - 1)) + 1;
-    const randomProduct =  allProducts[x]
+    const allProducts =  read()
+    const randomizer = Math.floor(Math.random()*allProducts.length);
+    const randomProduct =  JSON.stringify(allProducts[randomizer])
     res.send(`${randomProduct}`)
 })
 
