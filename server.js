@@ -8,7 +8,7 @@ class Contenedor {
         this.filename = filename;
     }
 
-    read = async () => {
+read = async () => {
         try {
             const data = await fs.promises.readFile(this.filename, "utf-8");
             return JSON.parse(data);
@@ -33,8 +33,8 @@ app.listen(port, () => {
 
 
 app.get('/', (req, res) => {
-    res.send("<h1>Bienvenidos al tercer desafío</h1>")
-})
+    res.send("<h1>Bienvenidos al tercer desafío</h1><h2>/productos dirige a un listado de los nombres de los productos</h2><h2>/productorandom dirige al detalle de un objeto aleatorio</h2>")
+    })
 
 app.get('/productos', async (req, res) => {
     try {
