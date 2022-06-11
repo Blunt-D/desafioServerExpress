@@ -3,21 +3,33 @@ import express from "express"
 const app = express()
 const port = 8080
 
+class Contenedor {
+    constructor(filename) {
+        this.filename = filename;
+    }
+
+    read = async () => {
+        try {
+            const data = await fs.promises.readFile(this.filename, "utf-8");
+            return JSON.parse(data);
+        } catch (error) {
+            res.send({'Error': e.message})
+        }
+    
+        }
+}
+
+const productos = new Contenedor("./productos.json");
+
+
+
 app.listen(port, () => {
     {
         console.log(`Servidor http escuchando en el puerto ${port}`);
     }
 })
 
-const read = async () => {
-    try {
-        const data = await fs.promises.readFile('./productos.json', "utf-8");
-        return JSON.parse(data);
-    } catch (error) {
-        res.send({'Error': e.message})
-    }
 
-    }
 
 
 app.get('/', (req, res) => {
@@ -26,7 +38,7 @@ app.get('/', (req, res) => {
 
 app.get('/productos', async (req, res) => {
     try {
-        const allProducts = await read() 
+        const allProducts = await productos.read() 
         const showAllProducts = allProducts.map(obj => {
             return obj.title
         })
@@ -34,17 +46,16 @@ app.get('/productos', async (req, res) => {
     } catch (error) {
         res.send({'Error': error.message})
     }
-
 })
 
 app.get('/productoRandom', async (req, res) => {
     try {
-        const allProducts =  await read()
+        const allProducts =  await productos.read()
         const randomizer = Math.floor(Math.random()*allProducts.length);
         const randomProduct =  JSON.stringify(allProducts[randomizer])
         res.send(`${randomProduct}`)
     } catch (error) {
-        res.send({'Error': e.message})
+        res.send({'Error': error.message})
     }
 })
 
