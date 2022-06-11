@@ -26,8 +26,10 @@ app.get('/', (req, res) => {
 
 app.get('/productos', async (req, res) => {
     try {
-        const allProducts = await read()
-        const showAllProducts = JSON.stringify(allProducts)
+        const allProducts = await read() 
+        const showAllProducts = allProducts.map(obj => {
+            return obj.title
+        })
         res.send(`Los productos disponibles son ${showAllProducts}`)
     } catch (error) {
         res.send({'Error': error.message})
