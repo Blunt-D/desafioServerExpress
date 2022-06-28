@@ -1,26 +1,7 @@
-import fs from "fs";
+import { productos } from "./productos.js"
 import express from "express"
 const app = express()
 const port = 8080
-
-class Contenedor {
-    constructor(filename) {
-        this.filename = filename;
-    }
-
-read = async () => {
-        try {
-            const data = await fs.promises.readFile(this.filename, "utf-8");
-            return JSON.parse(data);
-        } catch (error) {
-            res.send({'Error': e.message})
-        }
-    
-        }
-}
-
-const productos = new Contenedor("./productos.json");
-
 
 
 app.listen(port, () => {
